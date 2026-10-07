@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thực hành Tạo Menu Dọc Dropdown</title>
+    <title>Thực hành Tạo Menu Ngang Dropdown</title>
     <style>
-        /* Reset font và khoảng cách cơ bản */
+        /* Reset font và khoảng cách cơ bản cho trang */
         * {
             margin: 0;
             padding: 0;
@@ -14,54 +14,77 @@
         }
 
         body {
-            padding: 30px;
+            padding: 40px;
             background-color: #f4f6f9;
         }
 
-        /* Định dạng danh sách ul, li */
+        /* 1. Bộ chọn thiết lập phân vùng chính cho menu */
+        #menu {
+            height: 40px;
+            background-color: #333333;
+            border-bottom: 3px solid #cc0000;
+        }
+
         #menu ul {
             list-style: none;
             margin: 0;
             padding: 0;
         }
 
-        #menu li {
-            list-style: none;
-            position: relative;
-            width: 120px;
-            height: 30px;
-            padding: 0 20px;
-            background-color: black;
-            line-height: 30px;
-            cursor: pointer;
-            border-bottom: 1px solid #222;
+        /* 2. Cố định các phần tử cấp 1 nằm ngang bằng float: left */
+        #menu > ul > li {
+            float: left;
+            position: relative; /* Mốc vị trí cho menu con absolute */
         }
 
-        /* Định dạng liên kết thẻ a */
+        /* 3. Định dạng kích thước và màu sắc liên kết thẻ a */
         #menu a {
-            text-decoration: none;
-            color: white;
             display: block;
-            font-size: 14px;
+            width: 140px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: bold;
         }
 
-        /* Hiệu ứng rê chuột qua thẻ li */
-        #menu li:hover {
-            background-color: #444;
+        /* 4. Đổi màu nền sang đỏ khi đưa con trỏ chuột qua */
+        #menu li:hover > a {
+            background-color: #cc0000;
         }
 
-        /* Định dạng danh sách con (Submenu) */
-        #menu li ul {
+        /* 5. Định dạng menu con (Submenu) và ẩn mặc định bằng visibility: hidden */
+        #menu ul ul {
             position: absolute;
-            top: 0;
-            left: 160px; /* Tránh đè lên menu chính (120px width + 40px padding = 160px) */
+            top: 40px;
+            left: 0;
             visibility: hidden;
             opacity: 0;
             transition: visibility 0s, opacity 0.2s linear;
+            background-color: #333333;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 100;
         }
 
-        /* Hiển thị danh sách con khi hover vào mục cha */
-        #menu li:hover > ul {
+        /* Các mục menu con xếp dọc */
+        #menu ul ul li {
+            float: none;
+            position: relative;
+            border-bottom: 1px solid #444444;
+        }
+
+        #menu ul ul a {
+            font-weight: normal;
+            font-size: 14px;
+            text-align: left;
+            padding-left: 15px;
+            width: 160px;
+        }
+
+        /* 6. Hiển thị menu con khi rế chuột vào thẻ li của menu cha */
+        #menu ul li:hover > ul {
             visibility: visible;
             opacity: 1;
         }
@@ -69,21 +92,25 @@
 </head>
 <body>
 
-    <h2 style="margin-bottom: 20px; color: #333;">Menu Dọc Dropdown</h2>
+    <h2 style="margin-bottom: 20px; color: #333;">Trình Đơn Ngang Dropdown</h2>
 
+    <!-- Khối thanh menu ngang -->
     <div id="menu">
         <ul>
             <li><a href="#">Trang chủ</a></li>
             <li>
-                <a href="#">Sản phẩm &#9656;</a>
+                <a href="#">Sản phẩm &#9662;</a>
+                <!-- Menu con cấp 2 -->
                 <ul>
                     <li><a href="#">Điện thoại</a></li>
                     <li><a href="#">Laptop</a></li>
                     <li><a href="#">Máy tính bảng</a></li>
+                    <li><a href="#">Phụ kiện</a></li>
                 </ul>
             </li>
             <li>
-                <a href="#">Dịch vụ &#9656;</a>
+                <a href="#">Dịch vụ &#9662;</a>
+                <!-- Menu con cấp 2 -->
                 <ul>
                     <li><a href="#">Bảo hành</a></li>
                     <li><a href="#">Sửa chữa</a></li>
